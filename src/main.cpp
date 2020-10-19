@@ -22,6 +22,13 @@ int main() {
 
     MatrixXd i = Gaussian::InterpolationMatrix(points, 0.25);
     std::cout << i << std::endl;
+    std::cout << "Get weights..." << std::endl;
+    MatrixXd controls = ControlMatrix(points);
+    std::cout << "Control points:\n";
+    std::cout << controls << std::endl;
+    Matrix<double, N, M> weights = SolveWeights(i, controls);
+    std::cout << "Weights matrix:\n";
+    std::cout << weights << std::endl;
 
     return 0;
 }
