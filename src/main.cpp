@@ -21,6 +21,8 @@ int main() {
         points.push_back(p);
     }
 
+    std::cout << "Random values have stress " << Stress1(points) << std::endl;
+
     MatrixXd i = Gaussian::InterpolationMatrix(points, 0.25);
     std::cout << i << std::endl;
     std::cout << "Get weights..." << std::endl;
