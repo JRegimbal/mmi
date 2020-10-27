@@ -3,7 +3,7 @@
 #include <random>
 
 #define N 5
-#define M 10
+#define M 4
 
 using namespace Interpol;
 using namespace Eigen;
@@ -16,8 +16,10 @@ int main() {
     std::cout << "Using " << N << " samples with " << M << " DoF.\n";
     for (size_t i = 0; i < N; i++) {
         ControlPoint p;
-        p.control = VectorXd::NullaryExpr(M, 1, [&]() { return dis(gen); });
-        p.visual = Vector2d::NullaryExpr(2, 1, [&]() { return dis(gen); });
+        p.control = VectorXd::NullaryExpr(
+            M, 1, [&]() { return (double)(int)dis(gen); });
+        p.visual = Vector2d::NullaryExpr(
+            2, 1, [&]() { return (double)(int)dis(gen); });
         points.push_back(p);
     }
 
@@ -29,11 +31,18 @@ int main() {
     MatrixXd controls = ControlMatrix(points);
     std::cout << "Control points:\n";
     std::cout << controls << std::endl;
+    MatrixXd visual(2, N);
+    for (size_t j = 0; j < points.size(); j++) {
+        visual.col(j) = points.at(j).visual;
+    }
+    std::cout << "Visual points:\n";
+    std::cout << visual << std::endl;
     Matrix<double, N, M> weights = SolveWeights(i, controls);
     std::cout << "Weights matrix:\n";
     std::cout << weights << std::endl;
 
-    Vector2d vis = Vector2d::NullaryExpr(2, 1, [&]() { return dis(gen); });
+    Vector2d vis =
+        Vector2d::NullaryExpr(2, 1, [&]() { return (double)(int)dis(gen); });
     std::cout << "Interpolating from point (" << vis(0) << ", " << vis(1)
               << "):\n";
     VectorXd interpolated = Gaussian::Interpolate(weights, vis, points, 0.25);
