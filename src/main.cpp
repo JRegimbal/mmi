@@ -33,5 +33,9 @@ int main() {
     std::cout << "Weights matrix:\n";
     std::cout << weights << std::endl;
 
+    Vector2d vis = Vector2d::NullaryExpr(2, 1, [&](){return dis(gen);});
+    std::cout << "Interpolating from point (" << vis(0) << ", " << vis(1) << "):\n";
+    VectorXd interpolated = Gaussian::Interpolate(weights, vis, points, 0.25);
+    std::cout << interpolated << std::endl;
     return 0;
 }
