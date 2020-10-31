@@ -38,7 +38,7 @@ void imatrix::m_run(int argc, t_atom *argv) {
     for (int i = 2; i < argc; i += size) {
         ControlPoint p;
         p.visual(0) = GetAFloat(argv[i]);
-        p.visual(1) = GetAFloat(argv[i+1]);
+        p.visual(1) = GetAFloat(argv[i + 1]);
         if (p.control.size() < size - 2) {
             p.control.resize(size - 2);
         }
@@ -51,17 +51,15 @@ void imatrix::m_run(int argc, t_atom *argv) {
     MatrixXd im = Gaussian::InterpolationMatrix(points, shape);
 
     int length = im.size();
-    t_atom * list = new t_atom[length];
+    t_atom *list = new t_atom[length];
     for (size_t i = 0; i < im.rows(); i++) {
         for (size_t j = 0; j < im.cols(); j++) {
-            post("Have %f", im(i,j));
-            SetFloat(list[j + i*im.cols()], im(i, j));
+            post("Have %f", im(i, j));
+            SetFloat(list[j + i * im.cols()], im(i, j));
         }
     }
 
     ToOutList(0, length, list);
 }
 
-void imatrix::m_shape(float f) {
-    shape = f;
-}
+void imatrix::m_shape(float f) { shape = f; }
