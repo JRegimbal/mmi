@@ -4,11 +4,13 @@
 using namespace Interpol;
 using namespace Eigen;
 
-imatrix::imatrix() {
+imatrix::imatrix(float shape) : shape(shape) {
     AddInList("length, size, and contorl points");
+    AddInFloat("gaussian shape parameter");
     AddOutList();
 
     FLEXT_ADDMETHOD(0, m_run);
+    FLEXT_ADDMETHOD(1, m_shape);
 }
 
 void imatrix::m_run(int argc, t_atom *argv) {
@@ -41,7 +43,7 @@ void imatrix::m_run(int argc, t_atom *argv) {
         points.push_back(p);
     }
 
-    MatrixXd im = Gaussian::InterpolationMatrix(points, 0.00001);
+    MatrixXd im = Gaussian::InterpolationMatrix(points, shape);
 
     int length = im.size();
     t_atom * list = new t_atom[length];
@@ -53,4 +55,8 @@ void imatrix::m_run(int argc, t_atom *argv) {
     }
 
     ToOutList(0, length, list);
+}
+
+void imatrix::m_shape(float f) {
+    shape = f;
 }

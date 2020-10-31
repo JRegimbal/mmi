@@ -7,16 +7,20 @@
 class imatrix : public flext_base {
     FLEXT_HEADER(imatrix, flext_base)
   public:
-    imatrix();
+    imatrix(float shape);
 
   protected:
     void m_run(int argc, t_atom *argv);
+    void m_shape(float f);
+
+    float shape;
 
   private:
     FLEXT_CALLBACK_V(m_run);
+    FLEXT_CALLBACK_F(m_shape);
 };
 
-FLEXT_LIB("imatrix", imatrix);
+FLEXT_LIB_1("imatrix", imatrix, float);
 
 static void lib_setup() {
     post("mmi lib (C)2020 Juliette Regimbal");
