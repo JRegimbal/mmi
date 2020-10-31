@@ -1,0 +1,4 @@
+NAME = mmi
+SRCDIR = src
+SRCS = externals.cpp gaussian.cpp interpolation.cpp
+INCPATH = -Iinclude -Ieigen
