@@ -4,13 +4,7 @@
 #error You need at least flext version 0.4.0
 #endif
 
-class mmi : public flext_base {
-    FLEXT_HEADER(mmi, flext_base)
-  public:
-    mmi();
-};
-
-class imatrix : public mmi {
+class imatrix : public flext_base {
     FLEXT_HEADER(imatrix, flext_base)
   public:
     imatrix();
@@ -22,4 +16,14 @@ class imatrix : public mmi {
     FLEXT_CALLBACK_V(m_run);
 };
 
-FLEXT_NEW("imatrix", imatrix);
+FLEXT_LIB("imatrix", imatrix);
+
+static void lib_setup() {
+    post("mmi lib (C)2020 Juliette Regimbal");
+    post("imatrix");
+    post("");
+
+    FLEXT_SETUP(imatrix);
+}
+
+FLEXT_LIB_SETUP(mmi, lib_setup);

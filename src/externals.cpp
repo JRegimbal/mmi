@@ -30,23 +30,27 @@ void imatrix::m_run(int argc, t_atom *argv) {
     std::vector<ControlPoint> points;
     for (int i = 2; i < argc; i += size) {
         ControlPoint p;
-        p.visual << GetAFloat(argv[i]), GetAFloat(argv[i + 1]);
+        p.visual(0) = GetAFloat(argv[i]);
+        p.visual(1) = GetAFloat(argv[i+1]);
+        if (p.control.size() < size - 2) {
+            p.control.resize(size - 2);
+        }
         for (int j = 2; j < size; j++) {
             p.control(j - 2) = GetAFloat(argv[i + j]);
         }
         points.push_back(p);
     }
 
-    MatrixXd im = Gaussian::InterpolationMatrix(points, 0.25);
+    MatrixXd im = Gaussian::InterpolationMatrix(points, 0.00001);
 
-    AtomList l;
+    int length = im.size();
+    t_atom * list = new t_atom[length];
     for (size_t i = 0; i < im.rows(); i++) {
         for (size_t j = 0; j < im.cols(); j++) {
-            t_atom a;
-            SetFloat(a, im(i, j));
-            l.Append(a);
+            post("Have %f", im(i,j));
+            SetFloat(list[j + i*im.cols()], im(i, j));
         }
     }
 
-    ToOutList(0, l);
+    ToOutList(0, length, list);
 }
