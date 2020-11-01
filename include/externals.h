@@ -3,8 +3,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include <flext.h>
 #include "interpolation.h"
+#include <flext.h>
 
 #if !defined(FLEXT_VERSION) || (FLEXT_VERSION < 400)
 #error You need at least flext version 0.4.0
@@ -47,7 +47,6 @@ class interpolate : public flext_base {
 };
 
 FLEXT_LIB_1("interpolate", interpolate, float);
-
 
 static void lib_setup() {
     post("mmi lib (C)2020 Juliette Regimbal");

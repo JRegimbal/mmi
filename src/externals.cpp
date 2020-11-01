@@ -116,7 +116,8 @@ void interpolate::m_interpolate(int argc, t_atom *argv) {
     }
 
     if (weights.size() == 0 || points.empty()) {
-        post("%s - The control values are not set. Can't interpolate!", thisName());
+        post("%s - The control values are not set. Can't interpolate!",
+             thisName());
         return;
     }
 
