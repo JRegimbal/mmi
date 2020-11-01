@@ -9,7 +9,7 @@
 using namespace Interpol;
 using namespace Eigen;
 
-imatrix::imatrix(float shape) : shape(shape) {
+weights::weights(float shape) : shape(shape) {
     AddInList("length, size, and contorl points");
     AddInFloat("gaussian shape parameter");
     AddOutList();
@@ -18,7 +18,7 @@ imatrix::imatrix(float shape) : shape(shape) {
     FLEXT_ADDMETHOD(1, m_shape);
 }
 
-void imatrix::m_run(int argc, t_atom *argv) {
+void weights::m_run(int argc, t_atom *argv) {
     if (argc < 2) {
         post("%s - Size of inputs not specified!", thisName());
         return;
@@ -49,17 +49,18 @@ void imatrix::m_run(int argc, t_atom *argv) {
     }
 
     MatrixXd im = Gaussian::InterpolationMatrix(points, shape);
+    MatrixXd controls = ControlMatrix(points);
+    MatrixXd weights = SolveWeights(im, controls);
 
-    int length = im.size();
+    int length = weights.size();
     t_atom *list = new t_atom[length];
-    for (size_t i = 0; i < im.rows(); i++) {
-        for (size_t j = 0; j < im.cols(); j++) {
-            post("Have %f", im(i, j));
-            SetFloat(list[j + i * im.cols()], im(i, j));
+    for (size_t i = 0; i < weights.rows(); i++) {
+        for (size_t j = 0; j < weights.cols(); j++) {
+            SetFloat(list[j + i * weights.cols()], weights(i, j));
         }
     }
 
     ToOutList(0, length, list);
 }
 
-void imatrix::m_shape(float f) { shape = f; }
+void weights::m_shape(float f) { shape = f; }

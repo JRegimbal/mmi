@@ -9,10 +9,10 @@
 #error You need at least flext version 0.4.0
 #endif
 
-class imatrix : public flext_base {
-    FLEXT_HEADER(imatrix, flext_base)
+class weights : public flext_base {
+    FLEXT_HEADER(weights, flext_base)
   public:
-    imatrix(float shape);
+    weights(float shape);
 
   protected:
     void m_run(int argc, t_atom *argv);
@@ -25,14 +25,14 @@ class imatrix : public flext_base {
     FLEXT_CALLBACK_F(m_shape);
 };
 
-FLEXT_LIB_1("imatrix", imatrix, float);
+FLEXT_LIB_1("weights", weights, float);
 
 static void lib_setup() {
     post("mmi lib (C)2020 Juliette Regimbal");
-    post("imatrix");
+    post("weights");
     post("");
 
-    FLEXT_SETUP(imatrix);
+    FLEXT_SETUP(weights);
 }
 
 FLEXT_LIB_SETUP(mmi, lib_setup);
