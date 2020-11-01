@@ -1,17 +1,42 @@
 project(mm-interpolation)
 cmake_minimum_required(VERSION 3.18)
-set(CMAKE_BUILD_TYPE DEBUG)
+set(CMAKE_BUILD_TYPE RELEASE)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 file(GLOB_RECURSE src_files "src/*.cpp")
 file(GLOB_RECURSE include_files "include/*.h")
 
-add_executable(mm-interpolation ${src_files})
+add_executable(mm-interpolation src/main.cpp src/gaussian.cpp src/interpolation.cpp)
 target_include_directories(mm-interpolation PUBLIC
     include
-    src
     eigen
+)
+
+add_library(mmi SHARED src/externals.cpp src/gaussian.cpp src/interpolation.cpp)
+target_include_directories(mmi PUBLIC
+    include
+    eigen
+    /usr/include/pd
+    /usr/include/flext
+)
+
+target_compile_definitions(mmi
+    PUBLIC UNIX
+    PUBLIC FLEXT_SYS=2
+    PUBLIC FLEXT_SHARED
+    PUBLIC FLEXT_USE_CMEM
+    PUBLIC PD
+)
+
+target_link_libraries(mmi
+    flext-pd
+)
+
+set_target_properties(mmi PROPERTIES
+    OUTPUT_NAME "mmi.pd_linux"
+    SUFFIX ""
+    PREFIX ""
 )
 
 add_custom_target(lint
