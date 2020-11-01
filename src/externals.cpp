@@ -82,6 +82,12 @@ void interpolate::m_weight(int argc, t_atom *argv) {
     int number = GetAInt(argv[0]);
     int size = GetAInt(argv[1]);
 
+    if (number <= 0 || size <= 0) {
+        post("%s - Need positive integer values for number and size!",
+             thisName());
+        return;
+    }
+
     // Check if total size matches expected.
     if (argc != number * size + 2) {
         post("%s - Expected a message of length %d but got %d!", thisName(),
