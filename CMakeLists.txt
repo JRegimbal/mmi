@@ -13,31 +13,30 @@ target_include_directories(mm-interpolation PUBLIC
     eigen
 )
 
-add_library(mmi SHARED src/externals.cpp src/gaussian.cpp src/interpolation.cpp)
-target_include_directories(mmi PUBLIC
-    include
-    eigen
-    /usr/include/pd
-    /usr/include/flext
-)
-
-target_compile_definitions(mmi
-    PUBLIC UNIX
-    PUBLIC FLEXT_SYS=2
-    PUBLIC FLEXT_SHARED
-    PUBLIC FLEXT_USE_CMEM
-    PUBLIC PD
-)
-
-target_link_libraries(mmi
-    flext-pd
-)
-
-set_target_properties(mmi PROPERTIES
-    OUTPUT_NAME "mmi.pd_linux"
-    SUFFIX ""
-    PREFIX ""
-)
+if(CMAKE_SYSTEM_NAME MATCHES "Linux")
+    add_library(mmi SHARED src/externals.cpp src/gaussian.cpp src/interpolation.cpp)
+    target_include_directories(mmi PUBLIC
+        include
+        eigen
+        /usr/include/pd
+        /usr/include/flext
+    )
+    target_compile_definitions(mmi
+        PUBLIC UNIX
+        PUBLIC FLEXT_SYS=2
+        PUBLIC FLEXT_SHARED
+        PUBLIC FLEXT_USE_CMEM
+        PUBLIC PD
+    )
+    target_link_libraries(mmi
+        flext-pd
+    )
+    set_target_properties(mmi PROPERTIES
+        OUTPUT_NAME "mmi.pd_linux"
+        SUFFIX ""
+        PREFIX ""
+    )
+endif()
 
 add_custom_target(lint
     COMMAND clang-format -i ${src_files} ${include_files}
