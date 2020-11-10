@@ -12,6 +12,11 @@ target_include_directories(mm-interpolation PUBLIC
     include
     eigen
 )
+if (MSVC)
+    target_compile_options(mm-interpolation PRIVATE /W4 /WX)
+else()
+    target_compile_options(mm-interpolation PRIVATE -Wall -Wextra -pedantic -Werror)
+endif()
 
 if(CMAKE_SYSTEM_NAME MATCHES "Linux")
     add_library(mmi SHARED src/externals.cpp src/gaussian.cpp src/interpolation.cpp)
@@ -21,6 +26,7 @@ if(CMAKE_SYSTEM_NAME MATCHES "Linux")
         /usr/include/pd
         /usr/include/flext
     )
+    target_compile_options(mmi PRIVATE -Wall -Wextra -pedantic)
     target_compile_definitions(mmi
         PUBLIC UNIX
         PUBLIC FLEXT_SYS=2

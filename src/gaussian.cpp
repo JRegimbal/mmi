@@ -37,7 +37,7 @@ VectorXd Interpolate(const MatrixXd &weightMatrix, const Vector2d &visual,
     assert(weightMatrix.cols() == points.at(0).control.rows());
     double *rbfresult = new double[points.size()];
     VectorXd result(weightMatrix.cols());
-    for (size_t param = 0; param < weightMatrix.cols(); param++) {
+    for (auto param = 0; param < weightMatrix.cols(); param++) {
         double partial = 0;
         for (size_t point = 0; point < points.size(); point++) {
             if (param == 0) {

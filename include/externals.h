@@ -26,7 +26,7 @@ class weights : public flext_base {
     FLEXT_CALLBACK_F(m_shape);
 };
 
-FLEXT_LIB_1("weights", weights, float);
+FLEXT_LIB_1("weights", weights, float)
 
 class interpolate : public flext_base {
     FLEXT_HEADER(interpolate, flext_base)
@@ -46,7 +46,7 @@ class interpolate : public flext_base {
     FLEXT_CALLBACK_V(m_weight);
 };
 
-FLEXT_LIB_1("interpolate", interpolate, float);
+FLEXT_LIB_1("interpolate", interpolate, float)
 
 static void lib_setup() {
     post("mmi lib (C)2020 Juliette Regimbal");
@@ -57,4 +57,4 @@ static void lib_setup() {
     FLEXT_SETUP(interpolate);
 }
 
-FLEXT_LIB_SETUP(mmi, lib_setup);
+FLEXT_LIB_SETUP(mmi, lib_setup)

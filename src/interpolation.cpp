@@ -22,7 +22,7 @@ MatrixXd SolveWeights(const MatrixXd &imatrix, const MatrixXd &points) {
     // Make N-vector of weights for M parameters
     auto inter = imatrix.bdcSvd(ComputeThinU | ComputeThinV);
 
-    for (size_t i = 0; i < points.rows(); i++) {
+    for (auto i = 0; i < points.rows(); i++) {
         auto key = points.row(i).transpose();
         weights.col(i) = inter.solve(key);
     }
@@ -42,4 +42,4 @@ double Stress1(const std::vector<ControlPoint> &points) {
     }
     return sqrt(n / d);
 }
-}; // namespace Interpol
+} // namespace Interpol

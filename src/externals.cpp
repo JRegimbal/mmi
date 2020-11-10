@@ -54,8 +54,8 @@ void weights::m_run(int argc, t_atom *argv) {
 
     int length = weights.size();
     t_atom *list = new t_atom[length];
-    for (size_t i = 0; i < weights.rows(); i++) {
-        for (size_t j = 0; j < weights.cols(); j++) {
+    for (auto i = 0; i < weights.rows(); i++) {
+        for (auto j = 0; j < weights.cols(); j++) {
             SetFloat(list[j + i * weights.cols()], weights(i, j));
         }
     }
