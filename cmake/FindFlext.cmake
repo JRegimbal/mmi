@@ -2,6 +2,7 @@ message("Begin FindFlext.cmake")
 set(FLEXT_SEARCH_PATHS
     ~/Library/Frameworks
     /Library/Frameworks
+    /Applications
     /usr/local
     /usr
     /usr/local/lib
