@@ -18,7 +18,7 @@ find_library(Flext_LIBRARY
 )
 
 find_path(Flext_INCLUDE_DIR flext.h
-    PATH_SUFFIXES include/flext include
+    PATH_SUFFIXES include include/flext *
     PATHS ${FLEXT_SEARCH_PATHS}
 )
 
