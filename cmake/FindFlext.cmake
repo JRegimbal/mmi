@@ -24,6 +24,7 @@ find_path(Flext_INCLUDE_DIR flext.h
     PATHS ${FLEXT_SEARCH_PATHS}
 )
 
+message("Path: ${PD_PATH}")
 find_path(Flext_PD_INCLUDE m_pd.h
     PATH_SUFFIXES include include/pd src *
     PATHS ${FLEXT_SEARCH_PATHS}
