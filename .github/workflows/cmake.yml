@@ -8,19 +8,35 @@ env:
 
 jobs:
   build:
+    runs-on: ${{ matrix.os }}
     # The CMake configure and build commands are platform agnostic and should work equally
     # well on Windows or Mac.  You can convert this to a matrix build if you need
     # cross-platform coverage.
     # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
-    runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
     steps:
     - uses: actions/checkout@v2
       with:
         submodules: true
 
-    - name: Install Dependencies
+    - name: Install Dependencies (Ubuntu)
+      if: matrix.os == 'ubuntu-latest'
       run: sudo apt-get install pd-flext-dev
+    
+    - name: Install Dependencies (macOS)
+      if: matrix.os == 'macos-latest'
+      run: |
+        wget http://msp.ucsd.edu/Software/pd-0.51-3.mac.tar.gz
+        wget https://github.com/grrrr/flext/archive/v0-6-1.zip
+        tar xvzf pd-0.51-3.mac.tar.gz
+        mv Pd-0.51-3 /Applications/
+        unzip flext-0-6-1.zip
+        cd flext-0-6-1
+        ./bootstrap.sh
+        ./configure --enable-system=pd --with-sysdir=/Applications/Pd-0.51-3/Contents/Resources/src
+        make && sudo make install
 
     - name: Create Build Environment
       # Some projects don't allow in-source building, so create a separate build directory
