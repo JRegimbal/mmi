@@ -26,6 +26,7 @@ target_include_directories(mmi PUBLIC
     include
     eigen
     ${Flext_INCLUDE_DIR}
+    ${Flext_PD_INCLUDE}
 )
 target_link_libraries(mmi
     ${Flext_LIBRARY}
@@ -36,7 +37,6 @@ else()
     target_compile_options(mmi PRIVATE -Wall -Wextra -pedantic)
 endif()
 target_compile_definitions(mmi
-    PUBLIC UNIX
     PUBLIC FLEXT_SYS=2
     PUBLIC FLEXT_SHARED
     PUBLIC FLEXT_USE_CMEM
