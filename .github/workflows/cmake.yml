@@ -36,7 +36,7 @@ jobs:
         cd flext-0-6-1
         brew install automake
         ./bootstrap.sh
-        ./configure --enable-system=pd --with-sysdir=/Applications/Pd-0.51-3/Contents/Resources/src
+        ./configure --enable-system=pd --with-sdkdir=/Applications/Pd-0.51-3/Contents/Resources/src
         make && sudo make install
 
     - name: Create Build Environment
