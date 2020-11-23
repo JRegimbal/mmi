@@ -34,6 +34,7 @@ jobs:
         mv Pd-0.51-3.app /Applications/Pd-0.51-3
         unzip v0-6-1.zip
         cd flext-0-6-1
+        brew install autoconf
         ./bootstrap.sh
         ./configure --enable-system=pd --with-sysdir=/Applications/Pd-0.51-3/Contents/Resources/src
         make && sudo make install
