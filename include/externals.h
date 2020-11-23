@@ -49,10 +49,11 @@ class interpolate : public flext_base {
 FLEXT_LIB_1("interpolate", interpolate, float)
 
 static void lib_setup() {
+    /*
     post("mmi lib (C)2020 Juliette Regimbal");
     post("weights, interpolate");
     post("");
-
+    */
     FLEXT_SETUP(weights);
     FLEXT_SETUP(interpolate);
 }
