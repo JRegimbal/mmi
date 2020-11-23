@@ -25,4 +25,4 @@ find_path(Flext_INCLUDE_DIR flext.h
 message("End FindFlext.cmake")
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(Flext FLEXT_LIBRARY FLEXT_INCLUDE_DIR)
+find_package_handle_standard_args(Flext Flext_LIBRARY Flext_INCLUDE_DIR)
