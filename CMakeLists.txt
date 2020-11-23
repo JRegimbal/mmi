@@ -47,6 +47,11 @@ if (UNIX)
         PUBLIC UNIX
     )
 endif()
+if (APPLE)
+    target_compile_definitions(mmi
+        PUBLIC FLEXT_OS_MAC
+    )
+endif()
 if (MSVC)
     set_target_properties(mmi PROPERTIES
         OUTPUT_NAME "mmi.dll"
