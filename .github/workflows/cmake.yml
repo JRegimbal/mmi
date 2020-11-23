@@ -31,7 +31,7 @@ jobs:
         wget http://msp.ucsd.edu/Software/pd-0.51-3.mac.tar.gz
         wget https://github.com/grrrr/flext/archive/v0-6-1.zip
         tar xvzf pd-0.51-3.mac.tar.gz
-        mv Pd-0.51-3 /Applications/
+        mv Pd-0.51-3.app /Applications/Pd-0.51-3
         unzip flext-0-6-1.zip
         cd flext-0-6-1
         ./bootstrap.sh
