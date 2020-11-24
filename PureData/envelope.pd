@@ -2,7 +2,7 @@
 v3 float v4 float v5 float v6 float v7 float v8 float v9 float v10
 float v11 float sel;
 #N struct userpoint float x float y;
-#N canvas 221 234 1052 677 12;
+#N canvas 256 177 1052 677 12;
 #N canvas 143 85 450 302 controlpoint 0;
 #X obj 17 146 filledpolygon 0 900 0 -5 -5 -5 5 5 5 5 -5;
 #X obj 17 15 struct controlpoint float x float y float v0 float v1
@@ -417,6 +417,13 @@ v10 v11;
 #X coords 0 1 44100 -1 200 140 1;
 #X restore 751 233 graph;
 #X obj 479 298 tabwrite~ \$0-audio;
+#X text 7 369 Reset Data;
+#X text 141 460 View parameters for added control points;
+#X text 153 375 Create Control Point;
+#X text 323 16 Load points into external;
+#X text 519 30 Run interpolation for current user point position;
+#X text 735 424 Requires 3 channels. 1 and 2 are stereo audio \, 3
+is vibrotactile effect.;
 #X connect 2 0 4 1;
 #X connect 2 1 16 0;
 #X connect 4 0 5 0;
