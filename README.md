@@ -2,6 +2,7 @@
 
 Project doing RBFI from a joint tactile and audio control space to a 2D surface and back.
 Unpolished, but it *should* work!
+[NIME'21 paper](https://doi.org/10.21428/92fbeb44.1084cb07)
 
 ## Dependencies
 
